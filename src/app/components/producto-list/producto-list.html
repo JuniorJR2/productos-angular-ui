@@ -7,6 +7,7 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Precio</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,12 @@
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.descripcion }}</td>
                 <td>{{ producto.precio | currency }}</td>
+                <td>
+                    <button [routerLink]="['/editar', producto.id]">Editar</button>
+                    <button (click)='eliminar(producto.id)'>
+                        Eliminar
+                    </button>
+                </td>
             </tr>
             } @empty {
             <tr>

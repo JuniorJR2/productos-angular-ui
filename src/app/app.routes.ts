@@ -6,4 +6,5 @@ export const routes: Routes = [
   { path: 'productos', component: ProductoListComponent },
   { path: 'agregar', component: ProductoFormComponents },
   { path: '', redirectTo: '/productos', pathMatch: 'full' },
+  { path: 'editar/:id', component: ProductoFormComponents },
 ];
