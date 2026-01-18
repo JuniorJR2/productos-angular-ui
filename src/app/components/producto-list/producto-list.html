@@ -1,0 +1,27 @@
+<div class="container">
+    <h2>Lista de Productos</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (producto of productos; track producto.id) {
+            <tr>
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precio | currency }}</td>
+            </tr>
+            } @empty {
+            <tr>
+                <td colspan="4">Cargando productos o lista vacía...</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
