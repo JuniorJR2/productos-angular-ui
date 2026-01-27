@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Producto } from '../models/producto';
+import { ProductoDTO } from '../models/producto';
 
 @Injectable({
   providedIn: 'root',
@@ -13,25 +13,25 @@ export class ProductoService {
   constructor(private http: HttpClient) {}
 
   //Metodo para obtener lista de productos
-  listarProducto(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(this.api);
+  listarProducto(): Observable<ProductoDTO[]> {
+    return this.http.get<ProductoDTO[]>(this.api);
   }
 
   //metodo para crear productos
-  crearProducto(producto: Producto): Observable<Producto> {
-    return this.http.post<Producto>(this.api, producto);
+  crearProducto(producto: ProductoDTO): Observable<ProductoDTO> {
+    return this.http.post<ProductoDTO>(this.api, producto);
   }
 
-  listarProductoById(id: number): Observable<Producto> {
-    return this.http.get<Producto>(`${this.api}/${id}`);
+  listarProductoById(id: number): Observable<ProductoDTO> {
+    return this.http.get<ProductoDTO>(`${this.api}/${id}`);
   }
 
-  borrarProducto(id: number): Observable<void> {
+  borrarProducto(id: number): Observable<any> {
     return this.http.delete<void>(`${this.api}/${id}`);
   }
 
-  actualizarProducto(id: number, producto: Producto): Observable<Producto> {
+  actualizarProducto(id: number, producto: ProductoDTO): Observable<ProductoDTO> {
     // Combinamos la URL con el ID y enviamos el objeto producto
-    return this.http.put<Producto>(`${this.api}/${id}`, producto);
+    return this.http.put<ProductoDTO>(`${this.api}/${id}`, producto);
   }
 }

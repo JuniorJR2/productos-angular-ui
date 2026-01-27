@@ -1,0 +1,24 @@
+label {
+    font-weight: bold;
+    font-size: medium;
+}
+
+.campos {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+body {
+    /* Elimina el margen predeterminado de 8px del navegador */
+    margin: 10px;
+
+    /* Asegura que el body ocupe al menos toda la altura de la pantalla,
+       incluso en móviles (evita saltos con barras de herramientas) */
+    min-height: 100dvh;
+
+    /* Configuración básica de tipografía */
+    font-family: sans-serif;
+    line-height: 1.5;
+
+}

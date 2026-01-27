@@ -7,16 +7,18 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Precio</th>
+                <th>Stock</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @for (producto of productos; track producto.id) {
-            <tr>
+            <tr [class.stock-bajo]="producto.stock < 5">
                 <td>{{ producto.id }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.descripcion }}</td>
                 <td>{{ producto.precio | currency }}</td>
+                <td>{{ producto.stock}}</td>
                 <td>
                     <button [routerLink]="['/editar', producto.id]">Editar</button>
                     <button (click)='eliminar(producto.id)'>
@@ -26,7 +28,7 @@
             </tr>
             } @empty {
             <tr>
-                <td colspan="4">Cargando productos o lista vacía...</td>
+                <td colspan="5">Cargando productos o lista vacía...</td>
             </tr>
             }
         </tbody>

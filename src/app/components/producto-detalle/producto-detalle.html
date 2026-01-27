@@ -1,0 +1,36 @@
+<body>
+
+
+    <h1>Detalle del Producto</h1>
+
+
+    @if(producto){
+    <section>
+        <div class="campos">
+            <label for="">Nombre:</label>
+            <p>{{producto.nombre}}</p>
+        </div>
+        <div class="campos">
+            <label for="">Descripción:</label>
+            <p>{{producto.descripcion}}</p>
+        </div>
+        <div class="campos">
+            <label for="">Precio:</label>
+            <p>{{producto.precio}}</p>
+        </div>
+        <div class="campos">
+            <label for="">Cantidad Disponible:</label>
+            <p>{{producto.stock}}</p>
+        </div>
+
+        <button routerLink="/productos">Volver</button>
+    </section>
+    } @else if(mensajeError){
+    <div class="">
+        <p>⚠️ {{ mensajeError }}</p>
+        <button routerLink="/productos">Regresar a la lista</button>
+    </div>
+    }@else{
+    <p>Cargando Producto...</p>
+    }
+</body>

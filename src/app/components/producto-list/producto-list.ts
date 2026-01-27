@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Producto } from '../../models/producto';
+import { ProductoDTO } from '../../models/producto';
 import { ProductoService } from '../../services/producto.service';
 import { RouterLink } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ProductoListComponent implements OnInit {
   //1.- Guarda lo que manda Java
-  productos: Producto[] = [];
+  productos: ProductoDTO[] = [];
 
   //2.- Inyecta el servicio
   constructor(private productoService: ProductoService) {}
