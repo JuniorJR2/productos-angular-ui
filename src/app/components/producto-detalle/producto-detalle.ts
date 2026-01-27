@@ -23,7 +23,7 @@ export class ProductoDetalle implements OnInit {
     //Se lee el id desde la url
     const id = Number(this.route.snapshot.paramMap.get('id'));
     //Si el id existe, llamamos la logica
-    if (id) {
+    if (id && !isNaN(id)) {
       this.prodIndividual(id);
     }
   }

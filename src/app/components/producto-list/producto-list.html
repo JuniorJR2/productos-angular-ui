@@ -1,5 +1,11 @@
 <div class="container">
     <h2>Lista de Productos</h2>
+
+    <div>
+        <input type="text" id="search" placeholder="..." [formControl]="buscadorControl">
+        <button (click)="alBuscar()">Buscar</button>
+    </div>
+
     <table border="1">
         <thead>
             <tr>
@@ -13,7 +19,7 @@
         </thead>
         <tbody>
             @for (producto of productos; track producto.id) {
-            <tr [class.stock-bajo]="producto.stock < 5">
+            <tr [class.stock-bajo]="producto.stock < 5" [class.precio-alto]="producto.precio > 1000">
                 <td>{{ producto.id }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.descripcion }}</td>

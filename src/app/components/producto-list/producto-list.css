@@ -3,3 +3,9 @@
     color: #cc0000;
     font-weight: bold;
 }
+
+.precio-alto {
+    background-color: #cbfcb4;
+    color: green;
+    font-weight: bold;
+}

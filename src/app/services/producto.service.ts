@@ -34,4 +34,8 @@ export class ProductoService {
     // Combinamos la URL con el ID y enviamos el objeto producto
     return this.http.put<ProductoDTO>(`${this.api}/${id}`, producto);
   }
+
+  buscarProductoByInicial(nombre: string): Observable<ProductoDTO[]> {
+    return this.http.get<ProductoDTO[]>(`${this.api}/buscar/inicial?nombre=${nombre}`);
+  }
 }

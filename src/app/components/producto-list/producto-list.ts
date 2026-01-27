@@ -3,16 +3,20 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoDTO } from '../../models/producto';
 import { ProductoService } from '../../services/producto.service';
 import { RouterLink } from '@angular/router';
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-producto-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './producto-list.html',
   styleUrl: './producto-list.css',
 })
 export class ProductoListComponent implements OnInit {
   //1.- Guarda lo que manda Java
   productos: ProductoDTO[] = [];
+
+  buscadorControl = new FormControl('');
 
   //2.- Inyecta el servicio
   constructor(private productoService: ProductoService) {}
@@ -46,6 +50,24 @@ export class ProductoListComponent implements OnInit {
       });
     } else {
       console.error('No se puede eliminar un producto sin ID');
+    }
+  }
+
+  alBuscar() {
+    //1.- capturamos el valor directo del control
+    const nombre = this.buscadorControl.value || '';
+
+    //2.- Validacion
+    if (nombre && nombre.length > 0) {
+      this.productoService.buscarProductoByInicial(nombre).subscribe({
+        next: (data) => {
+          this.productos = data; //Se remplaza la lista con los resultados de la busqueda
+        },
+        error: (err) => console.error('Error en el buscador', err),
+      });
+    } else {
+      //3.-Si borro todo, volvemos a listar todos los productos
+      this.listarProducto();
     }
   }
 }
