@@ -1,3 +1,24 @@
+table {
+    margin-top: 10px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+input {
+    width: auto;
+    padding: 10px;
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+tr:hover {
+    background-color: gray;
+    color: black;
+}
+
 .stock-bajo {
     background-color: #ffcccc;
     color: #cc0000;
@@ -8,4 +29,10 @@
     background-color: #cbfcb4;
     color: green;
     font-weight: bold;
+}
+
+.buscador {
+    display: flex;
+    gap: 5px;
+    margin: 10px
 }

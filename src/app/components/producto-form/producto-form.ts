@@ -28,6 +28,7 @@ export class ProductoFormComponents {
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       descripcion: ['', Validators.required],
       precio: [0, [Validators.required, Validators.min(1)]],
+      stock: [0, [Validators.required, Validators.min(1)]],
     });
   }
 

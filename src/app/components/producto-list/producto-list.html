@@ -1,12 +1,12 @@
 <div class="container">
     <h2>{{titulo}}</h2>
 
-    <div>
+    <div class="buscador">
         <input type="text" id="search" placeholder="..." [formControl]="buscadorControl">
         <button (click)="alBuscar()">Buscar</button>
     </div>
     <!-- Buscador por precio -->
-    <div>
+    <div class="buscador">
         <input type="number" id="min" [formControl]="precioMin" placeholder="Coloca precio minimo...">
         <input type="number" id="max" [formControl]="precioMax" placeholder="Coloca precio maximo...">
 
