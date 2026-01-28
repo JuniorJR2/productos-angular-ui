@@ -5,6 +5,7 @@ import { ProductoService } from '../../services/producto.service';
 import { RouterLink } from '@angular/router';
 import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { errorContext } from 'rxjs/internal/util/errorContext';
 
 @Component({
   selector: 'app-producto-list',
@@ -17,6 +18,12 @@ export class ProductoListComponent implements OnInit {
   productos: ProductoDTO[] = [];
 
   buscadorControl = new FormControl('');
+
+  precioMin = new FormControl('');
+  precioMax = new FormControl('');
+
+  titulo: string = 'Todos los Productos';
+  mensajeErro: string = '';
 
   //2.- Inyecta el servicio
   constructor(private productoService: ProductoService) {}
@@ -31,6 +38,7 @@ export class ProductoListComponent implements OnInit {
     this.productoService.listarProducto().subscribe({
       next: (data) => {
         this.productos = data; //Si va bien, guardamos los datos
+        this.titulo = 'Todos los Productos';
         console.log(this.productos);
       },
       error: (err) => {
@@ -69,5 +77,36 @@ export class ProductoListComponent implements OnInit {
       //3.-Si borro todo, volvemos a listar todos los productos
       this.listarProducto();
     }
+  }
+
+  buscarByPrecio() {
+    const min = this.precioMin.value || 0;
+    const max = this.precioMax.value || 0;
+
+    if (max > min) {
+      this.productoService.productoPrecioMinMax(Number(min), Number(max)).subscribe({
+        next: (data) => {
+          this.productos = data;
+          this.mensajeErro = '';
+        },
+        error: (err) => {
+          console.error('erro en el buscador por precio', err);
+          this.mensajeErro = err.error;
+        },
+      });
+    } else {
+      this.mensajeErro = 'El precion minimo no puede ser mayor al precio maximo';
+      console.error(this.mensajeErro);
+    }
+  }
+
+  buscarPremium() {
+    this.productoService.productosPremium().subscribe({
+      next: (data) => {
+        this.productos = data;
+        this.titulo = 'Productos PREMIUM';
+      },
+      error: (err) => console.log('Error al buscar productos premium', err),
+    });
   }
 }

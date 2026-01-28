@@ -38,4 +38,12 @@ export class ProductoService {
   buscarProductoByInicial(nombre: string): Observable<ProductoDTO[]> {
     return this.http.get<ProductoDTO[]>(`${this.api}/buscar/inicial?nombre=${nombre}`);
   }
+
+  productoPrecioMinMax(min: number, max: number): Observable<ProductoDTO[]> {
+    return this.http.get<ProductoDTO[]>(`${this.api}/buscar/precio?min=${min}&max=${max}`);
+  }
+
+  productosPremium(): Observable<ProductoDTO[]> {
+    return this.http.get<ProductoDTO[]>(`${this.api}/premium`);
+  }
 }

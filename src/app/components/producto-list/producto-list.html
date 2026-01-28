@@ -1,11 +1,24 @@
 <div class="container">
-    <h2>Lista de Productos</h2>
+    <h2>{{titulo}}</h2>
 
     <div>
         <input type="text" id="search" placeholder="..." [formControl]="buscadorControl">
         <button (click)="alBuscar()">Buscar</button>
     </div>
+    <!-- Buscador por precio -->
+    <div>
+        <input type="number" id="min" [formControl]="precioMin" placeholder="Coloca precio minimo...">
+        <input type="number" id="max" [formControl]="precioMax" placeholder="Coloca precio maximo...">
 
+        <button (click)="buscarByPrecio()">Buscar por Precio</button>
+    </div>
+    @if(mensajeErro){
+    <p>{{mensajeErro}}</p>
+    }
+    <!-- Buscar productos premium -->
+    <div>
+        <button (click)="buscarPremium()">Productos Premium</button>
+    </div>
     <table border="1">
         <thead>
             <tr>
@@ -39,4 +52,5 @@
             }
         </tbody>
     </table>
+
 </div>
