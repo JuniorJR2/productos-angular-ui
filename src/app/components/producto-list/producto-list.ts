@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { errorContext } from 'rxjs/internal/util/errorContext';
+import { ProductoResumen } from '../../models/producto-resumen';
 
 @Component({
   selector: 'app-producto-list',
@@ -16,8 +17,10 @@ import { errorContext } from 'rxjs/internal/util/errorContext';
 export class ProductoListComponent implements OnInit {
   //1.- Guarda lo que manda Java
   productos: ProductoDTO[] = [];
+  productoResumen: ProductoResumen[] = [];
 
   buscadorControl = new FormControl('');
+  buscadorResumen = new FormControl('');
 
   precioMin = new FormControl('');
   precioMax = new FormControl('');
@@ -107,6 +110,17 @@ export class ProductoListComponent implements OnInit {
         this.titulo = 'Productos PREMIUM';
       },
       error: (err) => console.log('Error al buscar productos premium', err),
+    });
+  }
+
+  buscarResumen() {
+    const termino = this.buscadorResumen.value || '';
+    this.productoService.obtenerResumen(termino).subscribe({
+      next: (data) => {
+        this.productoResumen = data;
+        console.log('Lista de resumen de productos', data);
+      },
+      error: (err) => console.error('Error en la busqueda', err),
     });
   }
 }

@@ -53,4 +53,29 @@
         </tbody>
     </table>
 
+    <div class="buscador">
+        <input type="text" id="search" placeholder="..." [formControl]="buscadorResumen">
+        <button (click)="buscarResumen()">Buscar</button>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (productoR of productoResumen; track productoR.nombre) {
+            <tr>
+                <td>{{ productoR.nombre }}</td>
+                <td>{{ productoR.precio | currency }}</td>
+            </tr>
+            } @empty {
+            <tr>
+                <td colspan="5">Cargando productos o lista vacía...</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
 </div>

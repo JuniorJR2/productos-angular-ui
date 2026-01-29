@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductoDTO } from '../models/producto';
+import { ProductoResumen } from '../models/producto-resumen';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,12 @@ export class ProductoService {
 
   buscarProductoByInicial(nombre: string): Observable<ProductoDTO[]> {
     return this.http.get<ProductoDTO[]>(`${this.api}/buscar/inicial?nombre=${nombre}`);
+  }
+
+  obtenerResumen(nombre: string): Observable<ProductoResumen[]> {
+    //configuracion del parametro ?nombre
+    const params = new HttpParams().set('nombre', nombre);
+    return this.http.get<ProductoResumen[]>(`${this.api}/search`, { params });
   }
 
   productoPrecioMinMax(min: number, max: number): Observable<ProductoDTO[]> {
